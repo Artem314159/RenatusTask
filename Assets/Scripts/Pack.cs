@@ -7,15 +7,15 @@ namespace TrialGame1
     {
         public int CoinsAmount;
         public string CoinsImgName;
-        public string BonusImgName;
+        public int BonusAmount;
         public double Price;
         public string PopularityImgName;
 
-        public Pack(int coinsAmount, string coinsImgName, string bonusImgName, double price, string popularityImgName)
+        public Pack(int coinsAmount, string coinsImgName, int bonusAmount, double price, string popularityImgName)
         {
             CoinsAmount = coinsAmount;
             CoinsImgName = coinsImgName;
-            BonusImgName = bonusImgName;
+            BonusAmount = bonusAmount;
             Price = price;
             PopularityImgName = popularityImgName;
         }

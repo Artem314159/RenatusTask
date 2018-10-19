@@ -49,9 +49,11 @@ namespace TrialGame1
             packBoxTransform.GetChild(1).GetComponent<Image>().sprite =
                     Resources.Load<Sprite>("Coins/" + pack.CoinsImgName);
             //2 - BonusIconImg
-            if (pack.BonusImgName != null && pack.BonusImgName != "")
-                packBoxTransform.GetChild(2).GetComponent<Image>().sprite =
-                    Resources.Load<Sprite>("Bonuses/" + pack.BonusImgName);
+            if (pack.BonusAmount != 0)
+            {
+                packBoxTransform.GetChild(2).gameObject.SetActive(true);
+                packBoxTransform.GetChild(2).Find("BonusAmountTxt").GetComponent<Text>().text = pack.BonusAmount.ToString();
+            }
             //3 - PriceTxt
             packBoxTransform.GetChild(3).GetComponent<Button>().onClick.AddListener(delegate { Buying.PackBuying(pack); });
             packBoxTransform.GetChild(3).GetChild(0).GetComponent<Text>().text = "$" + pack.Price.ToString();

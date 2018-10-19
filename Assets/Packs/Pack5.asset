@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoinsAmount: 230
   CoinsImgName: Coins_05
-  BonusImgName: Bonus35
+  BonusAmount: 35
   Price: 19.99
   PopularityImgName: 
