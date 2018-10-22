@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 namespace TrialGame1
@@ -10,6 +11,7 @@ namespace TrialGame1
     {
         public GameObject Content;
         public GameObject PackPrefab;
+        public SpriteAtlas atlas;
         public List<Pack> packs;
         
         const float PACK_HEIGHT = 70;
@@ -41,26 +43,29 @@ namespace TrialGame1
 
             SetDefaultPackRectTransform(currPrefab, index);
 
-            Transform packBoxTransform = currPrefab.transform.GetChild(0);
+            Transform currPrefTrans = currPrefab.transform.GetChild(0);
 
-            //0 - CoinsCountTxt
-            packBoxTransform.GetChild(0).GetComponent<Text>().text = pack.CoinsAmount.ToString();
-            //1 - CoinsIconImg
-            packBoxTransform.GetChild(1).GetComponent<Image>().sprite =
-                    Resources.Load<Sprite>("Coins/" + pack.CoinsImgName);
-            //2 - BonusIconImg
-            if (pack.BonusAmount != 0)
             {
-                packBoxTransform.GetChild(2).gameObject.SetActive(true);
-                packBoxTransform.GetChild(2).Find("BonusAmountTxt").GetComponent<Text>().text = pack.BonusAmount.ToString();
+                //0 - CoinsCountTxt
+                currPrefTrans.Find("CoinsCountTxt").GetComponent<Text>().text = pack.CoinsAmount.ToString();
+
+                //1 - CoinsIconImg
+                currPrefTrans.Find("CoinsIconImg").GetComponent<Image>().sprite = atlas.GetSprite(pack.CoinsImgName.ToString());
+
+                //2 - BonusIconImg
+                if (pack.BonusAmount != 0)
+                {
+                    currPrefTrans.Find("Bonus").gameObject.SetActive(true);
+                    currPrefTrans.Find("Bonus").Find("BonusAmountTxt").GetComponent<Text>().text = pack.BonusAmount.ToString();
+                }
+
+                //3 - PriceTxt
+                currPrefTrans.Find("PriceBtn").GetComponent<Button>().onClick.AddListener(delegate { Buying.PackBuying(pack); });
+                currPrefTrans.Find("PriceBtn").GetChild(0).GetComponent<Text>().text = "$" + pack.Price.ToString();
+
+                //4 - PopularityIconImg
+                currPrefTrans.Find("PopularityIconImg").GetComponent<Image>().sprite = atlas.GetSprite(pack.PopularityImgName.ToString());
             }
-            //3 - PriceTxt
-            packBoxTransform.GetChild(3).GetComponent<Button>().onClick.AddListener(delegate { Buying.PackBuying(pack); });
-            packBoxTransform.GetChild(3).GetChild(0).GetComponent<Text>().text = "$" + pack.Price.ToString();
-            //4 - PopularityIconImg
-            if (pack.PopularityImgName != null && pack.PopularityImgName != "")
-                packBoxTransform.GetChild(4).GetComponent<Image>().sprite =
-                    Resources.Load<Sprite>("PopularityIcons/" + pack.PopularityImgName);
         }
 
         private void SetDefaultPackRectTransform(GameObject currPrefab, int index)

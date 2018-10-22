@@ -6,12 +6,12 @@ namespace TrialGame1
     public class Pack : ScriptableObject
     {
         public int CoinsAmount;
-        public string CoinsImgName;
+        public SpriteType CoinsImgName;
         public int BonusAmount;
         public double Price;
-        public string PopularityImgName;
+        public SpriteType PopularityImgName;
 
-        public Pack(int coinsAmount, string coinsImgName, int bonusAmount, double price, string popularityImgName)
+        public Pack(int coinsAmount, SpriteType coinsImgName, int bonusAmount, double price, SpriteType popularityImgName)
         {
             CoinsAmount = coinsAmount;
             CoinsImgName = coinsImgName;
